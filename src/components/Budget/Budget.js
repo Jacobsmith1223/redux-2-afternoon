@@ -7,6 +7,9 @@ import DisplayPurchases from './../shared/DisplayPurchases';
 import Loading from './../shared/Loading/Loading';
 import Nav from './../shared/Nav';
 import './Budget.css';
+import {connect} from 'react-redux'
+import {requestUserData} from './../../ducks/userReducer'
+import {requestBudgetData, addPurchase, removePurchase} from './../../ducks/budgetReducer'
 
 
 class Budget extends Component {
@@ -32,5 +35,11 @@ class Budget extends Component {
     )
   }
 }
+function mapStateToProps(state){
+  return{
+    budget: state.budget,
+    user: state.user
+  }
+}
 
-export default Budget;
+export default connect(mapStateToProps, {requestUserData, requestBudgetData, addPurchase,removePurchase})(Budget);
